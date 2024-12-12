@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import routes from "./routes";
+import "./global.css";
 
 const router = createBrowserRouter(routes);
 
