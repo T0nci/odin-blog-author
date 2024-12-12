@@ -1,0 +1,27 @@
+.error {
+  color: #d32f2f;
+  font-size: 1.75rem;
+  text-align: center;
+
+  margin-bottom: 1rem;
+}
+
+.link {
+  color: #00bcd4;
+  font-size: 1.5rem;
+
+  display: block;
+  text-align: center;
+}
+
+.link:link {
+  color: #00bcd4;
+}
+
+.link:hover {
+  color: #009eb3;
+}
+
+.link:active {
+  color: #008091;
+}
