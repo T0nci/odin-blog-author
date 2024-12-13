@@ -1,0 +1,7 @@
+.errors {
+  list-style: disc inside;
+}
+
+.error {
+  color: red;
+}
