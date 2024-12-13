@@ -85,6 +85,7 @@ const Login = () => {
                   }))
                 }
                 className={styles.input}
+                data-testid="password"
               />
             </div>
             <div>
