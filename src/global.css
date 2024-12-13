@@ -152,11 +152,22 @@ meter {
 :root {
   --nav-footer-background: #c0392b;
   --card-background: #f9f9f9;
+  --body-color: #333333;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  color: #333333;
+  color: var(--body-color, black);
 }
 
 .container {
