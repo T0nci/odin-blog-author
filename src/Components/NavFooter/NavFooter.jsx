@@ -5,12 +5,14 @@ import styles from "./NavFooter.module.css";
 
 const NavFooter = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [posts, setPosts] = useState(null);
 
   if (!token) return <Navigate to="/login" />;
 
   const handleLogout = () => {
     localStorage.clear("token");
     setToken(null);
+    setPosts(null);
   };
 
   return (
@@ -31,7 +33,7 @@ const NavFooter = () => {
       </nav>
       <main>
         <div className="container">
-          <Outlet context={{ token, setToken }} />
+          <Outlet context={{ token, setToken, posts, setPosts }} />
         </div>
       </main>
       <Footer />
