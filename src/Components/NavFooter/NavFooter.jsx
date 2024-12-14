@@ -14,7 +14,7 @@ const NavFooter = () => {
   };
 
   return (
-    <div data-testid="component">
+    <div className="position-footer" data-testid="component">
       <nav className={styles["main-nav"]}>
         <ul className={styles.nav + " container"}>
           <li>

@@ -35,6 +35,7 @@ describe("NavFooter Component", () => {
 
     expect(screen.getByTestId("component")).toMatchInlineSnapshot(`
       <div
+        class="position-footer"
         data-testid="component"
       >
         <nav

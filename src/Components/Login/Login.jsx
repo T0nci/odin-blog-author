@@ -41,7 +41,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="position-footer" data-testid="component">
       <main>
         <div className="container">
           <form onSubmit={handleSubmit} className={styles.form}>
@@ -97,7 +97,7 @@ const Login = () => {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 
