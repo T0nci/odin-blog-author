@@ -1,4 +1,4 @@
-import App from "./App";
+import NavFooter from "./Components/NavFooter/NavFooter";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
 import Login from "./Components/Login/Login";
 
@@ -10,8 +10,9 @@ const routes = [
   },
   {
     path: "/",
-    element: <App />,
+    element: <NavFooter />,
     errorElement: <ErrorPage />,
+    children: [],
   },
 ];
 

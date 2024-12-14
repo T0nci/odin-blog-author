@@ -1,0 +1,44 @@
+.main-nav {
+  background-color: var(--nav-footer-background, lightgray);
+}
+
+.nav {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.logout {
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.nav-link,
+.logout {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: inherit;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom-color 100ms ease-in-out;
+}
+
+.nav-link:hover,
+.logout:hover {
+  border-bottom-color: var(--body-color, black);
+}
+
+.last-child {
+  margin-left: auto;
+}
+
+@media (min-width: 500px) {
+  .nav {
+    gap: 1rem;
+  }
+}
