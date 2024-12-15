@@ -1,0 +1,76 @@
+.positioned {
+  position: relative;
+}
+
+.new {
+  text-decoration: none;
+  background-color: var(--nav-footer-background, lightgray);
+  color: var(--body-color, black);
+  font-weight: bold;
+  font-size: 2rem;
+  transition: background-color 200ms ease-in-out;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new:hover {
+  background-color: firebrick;
+}
+
+.error {
+  color: red;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+}
+
+.blogs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 130px;
+  gap: 0.5rem;
+}
+
+.blog {
+  background-color: var(--card-background, lightgray);
+  color: var(--body-color, black);
+  padding: 1rem;
+  border-radius: 10px;
+
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr auto;
+}
+
+.title {
+  font-size: 1.25rem;
+
+  grid-column: 1 / 3;
+}
+
+.blog-button {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--nav-footer-background, gray);
+  color: var(--body-color, black);
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  place-self: center;
+}
+
+.blog-button:hover {
+  background-color: firebrick;
+}
