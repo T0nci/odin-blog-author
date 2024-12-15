@@ -2,6 +2,7 @@ import NavFooter from "./Components/NavFooter/NavFooter";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
 import Login from "./Components/Login/Login";
 import Blogs from "./Components/Blogs/Blogs";
+import BlogForm from "./Components/BlogForm/BlogForm";
 
 const routes = [
   {
@@ -13,7 +14,10 @@ const routes = [
     path: "/",
     element: <NavFooter />,
     errorElement: <ErrorPage />,
-    children: [{ index: true, element: <Blogs /> }],
+    children: [
+      { index: true, element: <Blogs /> },
+      { path: "/posts/create", element: <BlogForm /> },
+    ],
   },
 ];
 
