@@ -10,15 +10,15 @@ describe("Errors Component", () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <ul
-          class="_errors_8c030b"
+          class="_errors_ae1fe8"
         >
           <li
-            class="_error_8c030b"
+            class="_error_ae1fe8"
           >
             401
           </li>
           <li
-            class="_error_8c030b"
+            class="_error_ae1fe8"
           >
             Bad request
           </li>

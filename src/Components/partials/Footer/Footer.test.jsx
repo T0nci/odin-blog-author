@@ -9,13 +9,13 @@ describe("Footer Component", () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <footer
-          class="_main-footer_e15009"
+          class="_main-footer_b16bb0"
         >
           <div
-            class="_footer_e15009 container"
+            class="_footer_b16bb0 container"
           >
             <a
-              class="_link_e15009"
+              class="_link_b16bb0"
               href="https://github.com/T0nci/"
             >
               <img
