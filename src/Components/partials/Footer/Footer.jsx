@@ -1,4 +1,4 @@
-import GithubIcon from "../../assets/github.svg";
+import GithubIcon from "../../../assets/github.svg";
 import styles from "./Footer.module.css";
 
 const Footer = () => {

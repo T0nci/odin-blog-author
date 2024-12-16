@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Navigate, Outlet } from "react-router";
-import Footer from "../Footer/Footer";
+import Footer from "../partials/Footer/Footer";
 import styles from "./NavFooter.module.css";
 
 const NavFooter = () => {

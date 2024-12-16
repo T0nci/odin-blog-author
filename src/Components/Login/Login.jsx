@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
-import Footer from "../Footer/Footer";
-import Errors from "../Errors/Errors";
+import Footer from "../partials/Footer/Footer";
+import Errors from "../partials/Errors/Errors";
 import styles from "./Login.module.css";
 
 const Login = () => {
