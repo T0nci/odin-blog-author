@@ -1,24 +1,46 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useParams } from "react-router";
 import { Editor } from "@tinymce/tinymce-react";
+import PropTypes from "prop-types";
+import styles from "./Blog.module.css";
 
-const BlogForm = () => {
+const Blog = ({ action }) => {
   const [fields, setFields] = useState({
     title: "",
-    content: "",
+    content: "<p>What will we orchestrate today?</p>",
     pending: false,
   });
-
+  const [tab, setTab] = useState("editing");
   const editorRef = useRef(null);
 
+  const { postId } = useParams();
   return (
     <>
+      <div className={styles.btns}>
+        <button onClick={() => setTab("editing")} className={styles.btn}>
+          Editing
+        </button>
+        <button
+          onClick={() => {
+            setFields((prevFields) => ({
+              ...prevFields,
+              content: editorRef.current.getContent(),
+            }));
+            setTab("preview");
+          }}
+          className={styles.btn}
+        >
+          Preview
+        </button>
+      </div>
       <Editor
         apiKey={import.meta.env.VITE_TINYMCE_API}
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>P for Popcorn!</p>"
+        initialValue={fields.content}
         init={{
-          height: 500,
-          menubar: false,
+          width: "100%",
+          height: 400,
+          menubar: true,
           plugins: [
             "advlist",
             "autolink",
@@ -55,4 +77,8 @@ const BlogForm = () => {
   );
 };
 
-export default BlogForm;
+Blog.propTypes = {
+  action: PropTypes.oneOf(["create", "update"]).isRequired,
+};
+
+export default Blog;
