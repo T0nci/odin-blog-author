@@ -1,0 +1,29 @@
+.main-heading {
+  font-weight: bold;
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+.content {
+  max-width: 75ch;
+  margin: 0 auto 1rem;
+}
+
+.content * {
+  /* Restore default browser styling for every element in the .content div */
+  all: revert;
+}
+
+.content pre {
+  overflow-x: auto;
+  background-color: var(--card-background, lightgray);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* For every code element that's not a descendant of pre apply styling */
+.content *:not(pre) code {
+  background-color: var(--card-background, lightgray);
+  padding: 2px 3px;
+  border-radius: 5px;
+}

@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router";
 import PropTypes from "prop-types";
 import styles from "./Blog.module.css";
 import BlogForm from "../partials/BlogForm/BlogForm";
+import Preview from "../partials/Preview/Preview";
 
 const Blog = ({ action }) => {
   const [fields, setFields] = useState({
@@ -47,6 +48,7 @@ const Blog = ({ action }) => {
           ref={editorRef}
         />
       )}
+      {tab === "preview" && <Preview fields={fields} />}
     </>
   );
 };
