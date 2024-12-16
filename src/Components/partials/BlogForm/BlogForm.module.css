@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.label {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: inherit;
+}
+
+.input {
+  border-radius: 10px;
+  border: none;
+  outline: 1px solid gray;
+  padding: 0.25rem 0.5rem;
+}
+
+.input:focus {
+  outline: 1px solid var(--nav-footer-background, firebrick);
+}
+
+.submit {
+  width: auto;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: bold;
+  background-color: var(--nav-footer-background, firebrick);
+  color: var(--body-color, black);
+  border: none;
+  border-radius: 10px;
+  transition: background-color 200ms ease-in-out;
+}
+
+.submit:hover {
+  background-color: firebrick;
+}
