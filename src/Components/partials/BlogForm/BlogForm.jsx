@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Errors from "../Errors/Errors";
 import styles from "./BlogForm.module.css";
 
-const BlogForm = forwardRef(function BlogFrm(
+const BlogForm = forwardRef(function BlogForm(
   { changeTitle, fields, setToken, action },
   editorRef,
 ) {
@@ -46,7 +46,7 @@ const BlogForm = forwardRef(function BlogFrm(
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.form}>
-        {errors && <Errors errors={errors} />}
+        {errors && <Errors errors={errors} data-testid="errors" />}
         <div>
           <label htmlFor="title" className={styles.label}>
             Title:

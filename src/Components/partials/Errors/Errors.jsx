@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import styles from "./Errors.module.css";
 
-const Errors = ({ errors }) => {
+const Errors = ({ errors, ...props }) => {
   return (
-    <ul className={styles.errors}>
+    <ul className={styles.errors} {...props}>
       {errors.map((error) => (
         <li key={error.msg} className={styles.error}>
           {error.msg}
