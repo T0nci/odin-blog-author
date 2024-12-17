@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { useOutletContext } from "react-router";
+import { useEffect, useRef, useState } from "react";
+import { useOutletContext, useParams, useNavigate } from "react-router";
 import PropTypes from "prop-types";
 import styles from "./Blog.module.css";
 import BlogForm from "../partials/BlogForm/BlogForm";
@@ -14,9 +14,51 @@ const Blog = ({ action }) => {
   const editorRef = useRef(null);
 
   const { setToken } = useOutletContext();
+  const navigate = useNavigate();
+  const { postId } = useParams();
+
+  useEffect(() => {
+    let isActive = true;
+    if (action === "update") {
+      const main = async () => {
+        const fetched = await fetch(
+          import.meta.env.VITE_API_URL + "/posts/" + postId,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          },
+        );
+
+        const response = await fetched.json();
+
+        if (!isActive) return;
+
+        if (response.post)
+          setFields({
+            title: response.post.title,
+            content: response.post.content,
+          });
+        else if (response.error === "404") navigate("/");
+        else {
+          setToken(null);
+          localStorage.removeItem("token");
+        }
+      };
+
+      main();
+    }
+
+    return () => {
+      isActive = false;
+    };
+  }, [action, navigate, postId, setToken]);
 
   return (
     <>
+      <h1 className={styles.action}>
+        {action === "create" ? "New blog" : `Editing blog ${postId}`}
+      </h1>
       <div className={styles.btns}>
         <button onClick={() => setTab("editing")} className={styles.btn}>
           Editing

@@ -101,6 +101,11 @@ describe("Blog Component", () => {
           <div
             class="container"
           >
+            <h1
+              class="_action_8b7481"
+            >
+              New blog
+            </h1>
             <div
               class="_btns_8b7481"
             >

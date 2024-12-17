@@ -16,7 +16,8 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Blogs /> },
-      { path: "/posts/create", element: <Blog action={"create"} /> },
+      { path: "/posts/create", element: <Blog action="create" /> },
+      { path: "/posts/update/:postId", element: <Blog action="update" /> },
     ],
   },
 ];
