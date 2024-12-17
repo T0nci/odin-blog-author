@@ -66,6 +66,7 @@ const Blogs = () => {
       );
       setError(null);
     } else if (response.error) setError(response.error);
+    else if (response.errors) setError(response.errors[0].msg);
     else setError("Unknown response.");
   };
 
