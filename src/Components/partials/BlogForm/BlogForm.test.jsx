@@ -213,7 +213,7 @@ describe("BlogForm Component", () => {
     global.localStorage = { getItem: () => "invalid token", removeItem };
     const json = vi.fn();
     json.mockResolvedValue({
-      error: "401", // or "500: Internal Server Error"
+      error: "401", // or "401: Unauthorized"
     });
     global.fetch.mockResolvedValue({ json });
 

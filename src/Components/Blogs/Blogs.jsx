@@ -20,7 +20,7 @@ const Blogs = () => {
       .then((res) => res.json())
       .then((response) => {
         if (isActive) {
-          if (response.error === "500: Internal Server Error") {
+          if (response.error === "401: Unauthorized") {
             setToken(null);
             localStorage.removeItem("token");
           } else

@@ -34,8 +34,7 @@ const BlogForm = forwardRef(function BlogForm(
 
       if (
         response.error &&
-        (response.error === "500: Internal Server Error" ||
-          response.error === "401")
+        (response.error === "401: Unauthorized" || response.error === "401")
       ) {
         setToken(null);
         localStorage.removeItem("token");

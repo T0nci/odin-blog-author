@@ -163,7 +163,7 @@ describe("Blogs Component", () => {
     };
     const json = vi.fn();
     json.mockResolvedValueOnce({
-      error: "500: Internal Server Error",
+      error: "401: Unauthorized",
     });
     global.fetch.mockResolvedValueOnce({ json });
 
