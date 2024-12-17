@@ -16,31 +16,35 @@ const BlogForm = forwardRef(function BlogForm(
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const fetched = await fetch(import.meta.env.VITE_API_URL + "/posts", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({
-        title: fields.title,
-        content: editorRef.current.getContent(),
-      }),
-      method: "POST",
-    });
+    try {
+      const fetched = await fetch(import.meta.env.VITE_API_URL + "/posts", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          title: fields.title,
+          content: editorRef.current.getContent(),
+        }),
+        method: "POST",
+      });
 
-    const response = await fetched.json();
+      const response = await fetched.json();
 
-    if (
-      response.error &&
-      (response.error === "500: Internal Server Error" ||
-        response.error === "401")
-    ) {
-      setToken(null);
-      localStorage.removeItem("token");
-    } else if (response.errors) setErrors(response.errors);
-    else if (response.post) navigate("/");
-    else setErrors([{ msg: "Unknown response." }]);
+      if (
+        response.error &&
+        (response.error === "500: Internal Server Error" ||
+          response.error === "401")
+      ) {
+        setToken(null);
+        localStorage.removeItem("token");
+      } else if (response.errors) setErrors(response.errors);
+      else if (response.post) navigate("/");
+      else setErrors([{ msg: "Unknown response." }]);
+    } catch (error) {
+      setErrors([{ msg: error + "" }]);
+    }
   };
 
   return (
