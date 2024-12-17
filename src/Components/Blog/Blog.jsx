@@ -87,6 +87,7 @@ const Blog = ({ action }) => {
           fields={fields}
           setToken={setToken}
           action={action}
+          postId={postId}
           ref={editorRef}
         />
       )}

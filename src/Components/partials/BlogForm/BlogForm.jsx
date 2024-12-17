@@ -6,7 +6,7 @@ import Errors from "../Errors/Errors";
 import styles from "./BlogForm.module.css";
 
 const BlogForm = forwardRef(function BlogForm(
-  { changeTitle, fields, setToken, action },
+  { changeTitle, fields, setToken, action, postId },
   editorRef,
 ) {
   const [errors, setErrors] = useState(null);
@@ -17,18 +17,23 @@ const BlogForm = forwardRef(function BlogForm(
     e.preventDefault();
 
     try {
-      const fetched = await fetch(import.meta.env.VITE_API_URL + "/posts", {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      const fetched = await fetch(
+        import.meta.env.VITE_API_URL +
+          `/posts${action === "update" ? `/${postId}` : ""}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            action: "update",
+            title: fields.title,
+            content: editorRef.current.getContent(),
+          }),
+          method: action === "create" ? "POST" : "PUT",
         },
-        body: JSON.stringify({
-          title: fields.title,
-          content: editorRef.current.getContent(),
-        }),
-        method: "POST",
-      });
+      );
 
       const response = await fetched.json();
 
@@ -39,7 +44,7 @@ const BlogForm = forwardRef(function BlogForm(
         setToken(null);
         localStorage.removeItem("token");
       } else if (response.errors) setErrors(response.errors);
-      else if (response.post) navigate("/");
+      else if (response.post || response.error === "404") navigate("/");
       else setErrors([{ msg: "Unknown response." }]);
     } catch (error) {
       setErrors([{ msg: error + "" }]);
@@ -122,6 +127,7 @@ BlogForm.propTypes = {
   }).isRequired,
   setToken: PropTypes.func.isRequired,
   action: PropTypes.oneOf(["create", "update"]).isRequired,
+  postId: PropTypes.string,
 };
 
 export default BlogForm;

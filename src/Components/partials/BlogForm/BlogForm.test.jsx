@@ -412,4 +412,45 @@ describe("BlogForm Component", () => {
     expect(removeItem).toHaveBeenCalledWith("token");
     expect(router.state.location.pathname).toBe("/login");
   });
+
+  // other scenarios are tested with above tests so this is enough
+  it("updates blog", async () => {
+    const removeItem = vi.fn();
+    global.localStorage = { getItem: () => "some token value", removeItem };
+    const json = vi.fn();
+    json.mockResolvedValueOnce({
+      post: {
+        id: 1,
+        title: "test title",
+        content: "test content",
+      },
+    });
+    json.mockResolvedValueOnce({
+      post: {
+        id: 1,
+        title: "updated title",
+        content: "updated content",
+      },
+    });
+    json.mockResolvedValueOnce({
+      post: {
+        // some post data
+      },
+    });
+    global.fetch.mockResolvedValue({ json });
+
+    let router = null;
+    await act(() => (router = setupRouter("update")));
+    const user = userEvent.setup();
+
+    await act(async () => {
+      await user.type(
+        screen.getByRole("textbox", { name: "Title:" }),
+        "updated title",
+      );
+      await user.click(screen.getByRole("button", { name: "Save" }));
+    });
+
+    expect(router.state.location.pathname).toBe("/");
+  });
 });
