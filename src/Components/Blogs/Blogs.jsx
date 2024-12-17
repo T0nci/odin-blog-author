@@ -5,8 +5,9 @@ import { formatTitle } from "../../utils";
 
 const Blogs = () => {
   const [error, setError] = useState(null);
+  const [posts, setPosts] = useState(null);
 
-  const { setToken, posts, setPosts } = useOutletContext();
+  const { setToken } = useOutletContext();
   const navigate = useNavigate();
 
   useEffect(() => {
