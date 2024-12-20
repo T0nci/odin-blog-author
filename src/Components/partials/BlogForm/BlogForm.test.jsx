@@ -37,10 +37,15 @@ vi.mock(import("react"), async (importOriginal) => {
 global.fetch = vi.fn();
 
 const Home = () => {};
+const Login = () => {};
 
 const setupRouter = (action) => {
   const router = createMemoryRouter(
     [
+      {
+        path: "/login",
+        element: <Login />,
+      },
       {
         path: "/",
         element: <NavFooter />,
@@ -199,13 +204,11 @@ describe("BlogForm Component", () => {
     const router = setupRouter("create");
     const user = userEvent.setup();
 
-    await act(async () => {
-      await user.type(
-        screen.getByRole("textbox", { name: "Title:" }),
-        "Blog Title",
-      );
-      await user.click(screen.getByRole("button", { name: "Save" }));
-    });
+    await user.type(
+      screen.getByRole("textbox", { name: "Title:" }),
+      "Blog Title",
+    );
+    await user.click(screen.getByRole("button", { name: "Save" }));
 
     expect(router.state.location.pathname).toBe("/");
   });
@@ -222,13 +225,11 @@ describe("BlogForm Component", () => {
     const router = setupRouter("create");
     const user = userEvent.setup();
 
-    await act(async () => {
-      await user.type(
-        screen.getByRole("textbox", { name: "Title:" }),
-        "Blog Title",
-      );
-      await user.click(screen.getByRole("button", { name: "Save" }));
-    });
+    await user.type(
+      screen.getByRole("textbox", { name: "Title:" }),
+      "Blog Title",
+    );
+    await user.click(screen.getByRole("button", { name: "Save" }));
 
     expect(removeItem).toHaveBeenCalledWith("token");
     expect(router.state.location.pathname).toBe("/login");
@@ -246,13 +247,11 @@ describe("BlogForm Component", () => {
     setupRouter("create");
     const user = userEvent.setup();
 
-    await act(async () => {
-      await user.type(
-        screen.getByRole("textbox", { name: "Title:" }),
-        "Blog Title",
-      );
-      await user.click(screen.getByRole("button", { name: "Save" }));
-    });
+    await user.type(
+      screen.getByRole("textbox", { name: "Title:" }),
+      "Blog Title",
+    );
+    await user.click(screen.getByRole("button", { name: "Save" }));
 
     expect(screen.getByTestId("errors")).toBeInTheDocument();
   });
@@ -453,13 +452,11 @@ describe("BlogForm Component", () => {
     await act(() => (router = setupRouter("update")));
     const user = userEvent.setup();
 
-    await act(async () => {
-      await user.type(
-        screen.getByRole("textbox", { name: "Title:" }),
-        "updated title",
-      );
-      await user.click(screen.getByRole("button", { name: "Save" }));
-    });
+    await user.type(
+      screen.getByRole("textbox", { name: "Title:" }),
+      "updated title",
+    );
+    await user.click(screen.getByRole("button", { name: "Save" }));
 
     expect(router.state.location.pathname).toBe("/");
   });
