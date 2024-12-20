@@ -114,10 +114,10 @@ const BlogForm = forwardRef(function BlogForm(
           {action === "update" && (
             <DeleteButton
               postId={postId}
-              styling={styles.submit}
               navigate={navigate}
               setErrors={setErrors}
               setToken={setToken}
+              className={styles.submit}
             />
           )}
           <button type="submit" className={styles.submit}>

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const DeleteButton = ({ postId, styling, navigate, setErrors, setToken }) => {
+const DeleteButton = ({ postId, navigate, setErrors, setToken, ...props }) => {
   const handleClick = async () => {
     try {
       const fetched = await fetch(
@@ -31,7 +31,7 @@ const DeleteButton = ({ postId, styling, navigate, setErrors, setToken }) => {
   };
 
   return (
-    <button className={styling} onClick={handleClick} type="button">
+    <button onClick={handleClick} type="button" {...props}>
       Delete
     </button>
   );
@@ -39,7 +39,6 @@ const DeleteButton = ({ postId, styling, navigate, setErrors, setToken }) => {
 
 DeleteButton.propTypes = {
   postId: PropTypes.string.isRequired,
-  styling: PropTypes.string.isRequired,
   navigate: PropTypes.func.isRequired,
   setErrors: PropTypes.func.isRequired,
   setToken: PropTypes.func.isRequired,
