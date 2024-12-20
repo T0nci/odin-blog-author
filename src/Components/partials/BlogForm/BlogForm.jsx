@@ -126,14 +126,16 @@ const BlogForm = forwardRef(function BlogForm(
           </button>
         </div>
       </form>
-      <Comments
-        postId={postId}
-        comments={fields.comments}
-        navigate={navigate}
-        setErrors={setErrors}
-        setToken={setToken}
-        deleteComment={deleteComment}
-      />
+      {action === "update" && (
+        <Comments
+          postId={postId}
+          comments={fields.comments}
+          navigate={navigate}
+          setErrors={setErrors}
+          setToken={setToken}
+          deleteComment={deleteComment}
+        />
+      )}
     </>
   );
 });
