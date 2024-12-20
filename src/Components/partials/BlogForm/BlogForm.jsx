@@ -4,6 +4,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import PropTypes from "prop-types";
 import Errors from "../Errors/Errors";
 import DeleteButton from "../DeleteButton/DeleteButton";
+import Comments from "../Comments/Comments";
 import styles from "./BlogForm.module.css";
 
 const BlogForm = forwardRef(function BlogForm(
@@ -125,7 +126,11 @@ const BlogForm = forwardRef(function BlogForm(
           </button>
         </div>
       </form>
-      {/* Component: Comments */}
+      <Comments
+        comments={fields.comments}
+        setErrors={setErrors}
+        setToken={setToken}
+      />
     </>
   );
 });
@@ -135,6 +140,7 @@ BlogForm.propTypes = {
   fields: PropTypes.shape({
     title: PropTypes.string,
     content: PropTypes.string,
+    comments: PropTypes.array,
   }).isRequired,
   setToken: PropTypes.func.isRequired,
   action: PropTypes.oneOf(["create", "update"]).isRequired,

@@ -9,6 +9,7 @@ const Blog = ({ action }) => {
   const [fields, setFields] = useState({
     title: "",
     content: "<p>What will we orchestrate today?</p>",
+    comments: [],
   });
   const [tab, setTab] = useState("editing");
   const editorRef = useRef(null);
@@ -21,7 +22,7 @@ const Blog = ({ action }) => {
     let isActive = true;
     if (action === "update") {
       const main = async () => {
-        const fetched = await fetch(
+        const fetchedBlog = await fetch(
           import.meta.env.VITE_API_URL + "/posts/" + postId,
           {
             headers: {
@@ -29,17 +30,27 @@ const Blog = ({ action }) => {
             },
           },
         );
+        const fetchedComments = await fetch(
+          import.meta.env.VITE_API_URL + "/posts/" + postId + "/comments",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          },
+        );
 
-        const response = await fetched.json();
+        const responseBlog = await fetchedBlog.json();
+        const responseComments = await fetchedComments.json();
 
         if (!isActive) return;
 
-        if (response.post)
+        if (responseBlog.post)
           setFields({
-            title: response.post.title,
-            content: response.post.content,
+            title: responseBlog.post.title,
+            content: responseBlog.post.content,
+            comments: responseComments.comments || [],
           });
-        else if (response.error === "404") navigate("/");
+        else if (responseBlog.error === "404") navigate("/");
         else {
           setToken(null);
           localStorage.removeItem("token");
