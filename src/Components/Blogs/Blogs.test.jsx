@@ -8,9 +8,14 @@ import NavFooter from "../NavFooter/NavFooter";
 
 global.fetch = vi.fn();
 
+const Placeholder = () => {};
+
 const setupRouter = () => {
   const router = createMemoryRouter(
     [
+      { path: "/login", element: <Placeholder /> },
+      { path: "/posts/create", element: <Placeholder /> },
+      { path: "/posts/update/:postId", element: <Placeholder /> },
       {
         path: "/",
         element: <NavFooter />,
@@ -199,10 +204,8 @@ describe("Blogs Component", () => {
     const toUnpublish = screen.getByRole("button", { name: "Unpublish" });
     const toPublish = screen.getByRole("button", { name: "Publish" });
 
-    await act(async () => {
-      await user.click(toUnpublish);
-      await user.click(toPublish);
-    });
+    await user.click(toUnpublish);
+    await user.click(toPublish);
 
     expect(toUnpublish.textContent).toBe("Publish");
     expect(toPublish.textContent).toBe("Unpublish");
@@ -231,10 +234,7 @@ describe("Blogs Component", () => {
     });
     const user = userEvent.setup();
 
-    await act(
-      async () =>
-        await user.click(screen.getByRole("button", { name: "Unpublish" })),
-    );
+    await user.click(screen.getByRole("button", { name: "Unpublish" }));
 
     expect(mock).toHaveBeenCalledWith("token");
     expect(router.state.location.pathname).toBe("/login");
