@@ -8,7 +8,7 @@ import Comments from "../Comments/Comments";
 import styles from "./BlogForm.module.css";
 
 const BlogForm = forwardRef(function BlogForm(
-  { changeTitle, fields, setToken, action, postId },
+  { changeTitle, deleteComment, fields, setToken, action, postId },
   editorRef,
 ) {
   const [errors, setErrors] = useState(null);
@@ -127,9 +127,12 @@ const BlogForm = forwardRef(function BlogForm(
         </div>
       </form>
       <Comments
+        postId={postId}
         comments={fields.comments}
+        navigate={navigate}
         setErrors={setErrors}
         setToken={setToken}
+        deleteComment={deleteComment}
       />
     </>
   );
@@ -137,6 +140,7 @@ const BlogForm = forwardRef(function BlogForm(
 
 BlogForm.propTypes = {
   changeTitle: PropTypes.func.isRequired,
+  deleteComment: PropTypes.func.isRequired,
   fields: PropTypes.shape({
     title: PropTypes.string,
     content: PropTypes.string,

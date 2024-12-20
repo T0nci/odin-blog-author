@@ -95,6 +95,14 @@ const Blog = ({ action }) => {
               title: e.target.value,
             }));
           }}
+          deleteComment={(id) =>
+            setFields((prevFields) => ({
+              ...prevFields,
+              comments: prevFields.comments.filter(
+                (comment) => comment.id !== id,
+              ),
+            }))
+          }
           fields={fields}
           setToken={setToken}
           action={action}
