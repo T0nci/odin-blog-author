@@ -21,9 +21,14 @@
   outline: 1px solid var(--nav-footer-background, firebrick);
 }
 
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .submit {
   width: auto;
-  margin: 0 auto;
   padding: 0.5rem 1rem;
   font-family: inherit;
   font-size: 1.25rem;

@@ -12,7 +12,7 @@ vi.mock(import("@tinymce/tinymce-react"), async (importOriginal) => {
 
   const Editor = () => (
     <div>
-      <textarea>Some blog content...</textarea>
+      <textarea defaultValue="Some blog content..."></textarea>
     </div>
   );
 
@@ -151,7 +151,9 @@ describe("BlogForm Component", () => {
                   Some blog content...
                 </textarea>
               </div>
-              <div>
+              <div
+                class="_buttons_104b85"
+              >
                 <button
                   class="_submit_104b85"
                   type="submit"
@@ -350,7 +352,15 @@ describe("BlogForm Component", () => {
                   Some blog content...
                 </textarea>
               </div>
-              <div>
+              <div
+                class="_buttons_104b85"
+              >
+                <button
+                  class="_submit_104b85"
+                  type="button"
+                >
+                  Delete
+                </button>
                 <button
                   class="_submit_104b85"
                   type="submit"

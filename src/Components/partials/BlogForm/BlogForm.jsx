@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { Editor } from "@tinymce/tinymce-react";
 import PropTypes from "prop-types";
 import Errors from "../Errors/Errors";
+import DeleteButton from "../DeleteButton/DeleteButton";
 import styles from "./BlogForm.module.css";
 
 const BlogForm = forwardRef(function BlogForm(
@@ -109,12 +110,22 @@ const BlogForm = forwardRef(function BlogForm(
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
-        <div>
+        <div className={styles.buttons}>
+          {action === "update" && (
+            <DeleteButton
+              postId={postId}
+              styling={styles.submit}
+              navigate={navigate}
+              setErrors={setErrors}
+              setToken={setToken}
+            />
+          )}
           <button type="submit" className={styles.submit}>
             Save
           </button>
         </div>
       </form>
+      {/* Component: Comments */}
     </>
   );
 });

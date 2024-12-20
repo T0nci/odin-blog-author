@@ -145,7 +145,9 @@ describe("Blog Component", () => {
               <textarea
                 data-testid="Editor"
               />
-              <div>
+              <div
+                class="_buttons_104b85"
+              >
                 <button
                   class="_submit_104b85"
                   type="submit"
