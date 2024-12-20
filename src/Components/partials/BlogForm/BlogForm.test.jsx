@@ -213,7 +213,7 @@ describe("BlogForm Component", () => {
     expect(router.state.location.pathname).toBe("/");
   });
 
-  it("redirects to login when token is invalid", async () => {
+  it("redirects to login when token is invalid for new post", async () => {
     const removeItem = vi.fn();
     global.localStorage = { getItem: () => "invalid token", removeItem };
     const json = vi.fn();
@@ -235,7 +235,7 @@ describe("BlogForm Component", () => {
     expect(router.state.location.pathname).toBe("/login");
   });
 
-  it("shows errors if server responds with any", async () => {
+  it("shows errors if server responds with any for new post", async () => {
     const removeItem = vi.fn();
     global.localStorage = { getItem: () => "invalid token", removeItem };
     const json = vi.fn();
@@ -259,12 +259,22 @@ describe("BlogForm Component", () => {
   it("renders for editing", async () => {
     global.localStorage = { getItem: () => "some token value" };
     const json = vi.fn();
-    json.mockResolvedValue({
+    json.mockResolvedValueOnce({
       post: {
         id: 1,
         title: "test title",
         content: "test content",
       },
+    });
+    json.mockResolvedValueOnce({
+      comments: [
+        {
+          id: 1,
+          content: "test comment",
+          displayName: "Tester",
+          date: "2000-01-01",
+        },
+      ],
     });
     global.fetch.mockResolvedValue({ json });
 
@@ -376,6 +386,28 @@ describe("BlogForm Component", () => {
               >
                 Comments:
               </h1>
+              <li
+                class="_comment_3280f7"
+              >
+                <p
+                  class="_bold_3280f7"
+                >
+                  Tester
+                </p>
+                <button
+                  class="_delete_3280f7"
+                >
+                  Delete
+                </button>
+                <p
+                  class="_bold_3280f7"
+                >
+                  01:00 01.01.2000
+                </p>
+                <p>
+                  test comment
+                </p>
+              </li>
             </ul>
           </div>
         </main>
@@ -415,7 +447,7 @@ describe("BlogForm Component", () => {
     expect(router.state.location.pathname).toBe("/");
   });
 
-  it("redirects to login when token is invalid", async () => {
+  it("redirects to login when token is invalid for editing", async () => {
     const removeItem = vi.fn();
     global.localStorage = { getItem: () => "invalid token", removeItem };
     const json = vi.fn();
@@ -444,15 +476,20 @@ describe("BlogForm Component", () => {
       },
     });
     json.mockResolvedValueOnce({
+      comments: [
+        {
+          id: 1,
+          content: "test comment",
+          displayName: "Tester",
+          date: "2000-01-01",
+        },
+      ],
+    });
+    json.mockResolvedValueOnce({
       post: {
         id: 1,
         title: "updated title",
         content: "updated content",
-      },
-    });
-    json.mockResolvedValueOnce({
-      post: {
-        // some post data
       },
     });
     global.fetch.mockResolvedValue({ json });
