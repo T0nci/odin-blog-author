@@ -465,8 +465,7 @@ describe("BlogForm Component", () => {
 
   // other scenarios are tested with above tests so this is enough
   it("updates blog", async () => {
-    const removeItem = vi.fn();
-    global.localStorage = { getItem: () => "some token value", removeItem };
+    global.localStorage = { getItem: () => "some token value" };
     const json = vi.fn();
     json.mockResolvedValueOnce({
       post: {
@@ -505,5 +504,79 @@ describe("BlogForm Component", () => {
     await user.click(screen.getByRole("button", { name: "Save" }));
 
     expect(router.state.location.pathname).toBe("/");
+  });
+
+  // integration test for DeleteButton
+  it("deletes a blog", async () => {
+    global.localStorage = { getItem: () => "some token value" };
+    const json = vi.fn();
+    json.mockResolvedValueOnce({
+      post: {
+        id: 1,
+        title: "test title",
+        content: "test content",
+      },
+    });
+    json.mockResolvedValueOnce({
+      comments: [
+        {
+          id: 1,
+          content: "test comment",
+          displayName: "Tester",
+          date: "2000-01-01",
+        },
+      ],
+    });
+    json.mockResolvedValueOnce({
+      status: "200",
+    });
+    global.fetch.mockResolvedValue({ json });
+
+    let router = null;
+    await act(() => (router = setupRouter("update")));
+    const user = userEvent.setup();
+
+    // Selecting the first button with Delete since it's above comments
+    await user.click(screen.getAllByRole("button", { name: "Delete" })[0]);
+
+    expect(router.state.location.pathname).toBe("/");
+  });
+
+  // integration test for Comments
+  it("deletes a comment", async () => {
+    global.localStorage = { getItem: () => "some token value" };
+    const json = vi.fn();
+    json.mockResolvedValueOnce({
+      post: {
+        id: 1,
+        title: "test title",
+        content: "test content",
+      },
+    });
+    json.mockResolvedValueOnce({
+      comments: [
+        {
+          id: 1,
+          content: "test comment",
+          displayName: "Tester",
+          date: "2000-01-01",
+        },
+      ],
+    });
+    json.mockResolvedValueOnce({
+      status: "200",
+    });
+    global.fetch.mockResolvedValue({ json });
+
+    await act(() => setupRouter("update"));
+    const user = userEvent.setup();
+
+    // Selecting the last listitem since the comment is last in DOM
+    let listItem = screen.getAllByRole("listitem");
+    listItem = listItem[listItem.length - 1];
+
+    await user.click(screen.getAllByRole("button", { name: "Delete" })[1]);
+
+    expect(listItem).not.toBeInTheDocument();
   });
 });
