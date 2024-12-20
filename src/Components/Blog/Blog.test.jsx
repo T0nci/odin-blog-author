@@ -156,6 +156,15 @@ describe("Blog Component", () => {
                 </button>
               </div>
             </form>
+            <ul
+              class="_comments_3280f7"
+            >
+              <h1
+                class="_heading_3280f7"
+              >
+                Comments:
+              </h1>
+            </ul>
           </div>
         </main>
         <footer
