@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import Footer from "../partials/Footer/Footer";
 import Errors from "../partials/Errors/Errors";
+import DemoButton from "../partials/DemoButton/DemoButton";
 import styles from "./Login.module.css";
 
 const Login = () => {
@@ -94,6 +95,11 @@ const Login = () => {
               </button>
             </div>
           </form>
+          <DemoButton
+            className={styles.demo + " " + styles.submit}
+            setErrors={setErrors}
+            navigate={navigate}
+          />
         </div>
       </main>
       <Footer />

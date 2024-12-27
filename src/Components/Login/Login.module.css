@@ -44,3 +44,8 @@
   background-color: var(--nav-footer-background, lightgray);
   cursor: pointer;
 }
+
+.demo {
+  display: block;
+  margin: 1rem auto 0;
+}

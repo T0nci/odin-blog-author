@@ -92,6 +92,11 @@ describe("Login Component", () => {
                 </button>
               </div>
             </form>
+            <button
+              class="_demo_b527bd _submit_b527bd"
+            >
+              Try Demo Account
+            </button>
           </div>
         </main>
         <footer
@@ -140,7 +145,7 @@ describe("Login Component", () => {
 
     await user.type(screen.getByRole("textbox"), "username");
     await user.type(screen.getByTestId("password"), "password");
-    await user.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("button", { name: "Submit" }));
 
     expect(setItem).toHaveBeenCalledWith("token", "some token value");
     expect(router.state.location.pathname).toBe("/");
@@ -159,7 +164,7 @@ describe("Login Component", () => {
 
     await user.type(screen.getByRole("textbox"), "username");
     await user.type(screen.getByTestId("password"), "password");
-    await user.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("button", { name: "Submit" }));
 
     const listItem = screen.getByRole("listitem");
     expect(listItem).toBeInTheDocument();
@@ -177,10 +182,28 @@ describe("Login Component", () => {
 
     await user.type(screen.getByRole("textbox"), "username");
     await user.type(screen.getByTestId("password"), "password");
-    await user.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("button", { name: "Submit" }));
 
     const listItem = screen.getByRole("listitem");
     expect(listItem).toBeInTheDocument();
     expect(listItem.textContent).toBe("Unknown error.");
+  });
+
+  it("logs the user in successfully with DemoButton", async () => {
+    const getItem = vi.fn(() => null);
+    const setItem = vi.fn();
+    global.localStorage = { getItem, setItem };
+
+    global.fetch.mockResolvedValueOnce({
+      json: vi.fn().mockResolvedValueOnce({ token: "some token value" }),
+    });
+
+    const router = setupRouter();
+    const user = userEvent.setup();
+
+    await user.click(screen.getByRole("button", { name: "Try Demo Account" }));
+
+    expect(setItem).toHaveBeenCalledWith("token", "some token value");
+    expect(router.state.location.pathname).toBe("/");
   });
 });
